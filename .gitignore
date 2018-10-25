@@ -1,0 +1,39 @@
+~$*
+.DS_Store
+
+/local.mk
+/build
+/build-*
+/build_*
+/Build-*
+/Build_*
+/*.app
+/.settings
+
+*.d
+*.o
+*.orig
+*.pb.h
+*.pb.cc
+
+bak_*
+/.ptp-sync
+.ptp-sync-folder
+/.gdbinit
+/Debug
+
+.gdb_history
+
+# python stuff
+lma.egg-info
+*.pyc
+*.ptx
+__pycache__/
+
+# ipython notebook stuff
+.ipynb_checkpoints
+
+# jetbrains stuff
+.idea
+*.iml
+
