@@ -28,7 +28,7 @@ def _coerceArray(array):
     else:
         return np.asanyarray(array)
 
-def _formatArray(arr, addbrackets, delimiter, fmt, newline, precision, squeeze, truncate):
+def _formatArray(arr, addbrackets, delimiter, fmt, newline, outerbrackets, precision, squeeze, truncate):
     """Private func that does the heavy needed by formatArray on a single array at a time.
     """
     # figure out proper bracket characters
@@ -95,9 +95,11 @@ def _formatArray(arr, addbrackets, delimiter, fmt, newline, precision, squeeze, 
             arFmt = arFmt[:-len(newline)]
 
         # add double enclosing backets
-        return leftBrac + (len(shape) - 1)*leftInsideBrac + arFmt + (len(shape) - 1)*rightInsideBrac + rightBrac
-    else:
-        return arFmt
+        arFmt = (len(shape) - 1)*leftInsideBrac + arFmt + (len(shape) - 1)*rightInsideBrac
+        if outerbrackets:
+            arFmt = leftBrac + arFmt + rightBrac
+
+    return arFmt
 
 def _joinFormattedArrays(arrFmt, newline, squeeze, blank, gutter):
     """Joins a list of pre-formatted arrays together and returns a single `str`.
@@ -168,6 +170,7 @@ def formatArray(*arr, **kwargs):
         ('newline',     '\n'),
         ('precision',   6),
         ('squeeze',     True),
+        ('outerbrackets', False),
         ('truncate',    None),
 
         ('blank',  ' '),
@@ -179,7 +182,7 @@ def formatArray(*arr, **kwargs):
 
     # call the internal func that does the heavy lifting
     faKwargs = dict((k, kwargsDefault[k])
-                    for k in ('addbrackets', 'delimiter', 'fmt', 'newline', 'precision', 'squeeze', 'truncate'))
+                    for k in ('addbrackets', 'delimiter', 'fmt', 'newline', 'precision', 'squeeze', 'outerbrackets', 'truncate'))
     arrFmt = [_formatArray(arr=ar, **faKwargs)
               for ar in arr]
 
@@ -195,7 +198,7 @@ def formatArrayAsArray(*arr, **kwargs):
     # default arg vals are specified a little weird for py2 compatibility
     defaults = dict([
         ('addbrackets', True),
-        ('delimiter',   ','),
+        ('delimiter',   ', '),
         ('newline',     '\n'),
     ])
     

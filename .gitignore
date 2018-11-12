@@ -25,7 +25,7 @@ bak_*
 .gdb_history
 
 # python stuff
-lma.egg-info
+/*.egg-info
 *.pyc
 *.ptx
 __pycache__/
@@ -37,3 +37,5 @@ __pycache__/
 .idea
 *.iml
 
+# temp files for tests
+/nppretty/test/**.txt
