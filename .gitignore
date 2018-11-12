@@ -38,4 +38,4 @@ __pycache__/
 *.iml
 
 # temp files for tests
-/nppretty/test/**.txt
+/nppretty/test/**/*.txt
