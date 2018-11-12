@@ -2,9 +2,9 @@
 
 ## Install
 
-Get the repo, `cd` into it, and then run
+Just install with `pip`:
 
-`pip install .`
+`pip install nppretty`
 
 ## Use
 
